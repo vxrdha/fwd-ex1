@@ -37,69 +37,77 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
 ~~~
-from http.server import HTTPServer, BaseHTTPRequestHandler
-content = """
+from http.server import HTTPServer,BaseHTTPRequestHandler
+content ='''
 <!DOCTYPE html>
-<html lang="en">
+<html>f
 <head>
-  <meta charset="UTF-8">
-  <title>Display Public IP Address</title>
+  <title>TCP/IP Protocol Table</title>
   <style>
-    body {
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto;
       font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f4f4f4;
     }
-    .ip-box {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      max-width: 400px;
-      margin: auto;
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
       text-align: center;
     }
-    .ip-address {
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+    caption {
       font-size: 1.5em;
-      color: #333;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-  <div class="ip-box">
-    <h2>Your Public IP Address is:</h2>
-    <p class="ip-address" id="ip">Loading...</p>
-  </div>
-
-  <script>
-    // Fetch the user's public IP using ipify API
-    fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('ip').textContent = data.ip;
-      })
-      .catch(error => {
-        document.getElementById('ip').textContent = 'Unable to fetch IP.';
-        console.error('Error fetching IP:', error);
-      });
-  </script>
-
+  <table>
+    <caption>TCP/IP Protocol Suite</caption>
+    <tr>
+      <th>Layer</th>
+      <th>Function</th>
+      <th>Common Protocols</th>
+    </tr>
+    <tr>
+      <td>Application</td>
+      <td>Provides services to user applications</td>
+      <td>HTTP, FTP, SMTP, DNS, DHCP, SNMP</td>
+    </tr>
+    <tr>
+      <td>Transport</td>
+      <td>Reliable or fast data transmission</td>
+      <td>TCP, UDP</td>
+    </tr>
+    <tr>
+      <td>Internet</td>
+      <td>Routing and logical addressing</td>
+      <td>IP, ICMP, ARP, RARP</td>
+    </tr>
+    <tr>
+      <td>Network Access</td>
+      <td>Physical data transmission</td>
+      <td>Ethernet, Wi-Fi, PPP</td>
+    </tr>
+  </table>
 </body>
 </html>
-
-
-"""
-class myhandler(BaseHTTPRequestHandler):
+'''
+class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        print("request received")
+        print("Get request received...")
         self.send_response(200)
-        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.send_header("content-type", "text/html")
         self.end_headers()
         self.wfile.write(content.encode())
-server_address = ('',8000)
-httpd = HTTPServer(server_address,myhandler)
-print("my webserver is running...")
+print("This is my webserver")
+server_address =('',8000)
+httpd = HTTPServer(server_address,MyServer)
 httpd.serve_forever()
 ~~~
 
