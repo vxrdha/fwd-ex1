@@ -40,7 +40,11 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 from http.server import HTTPServer,BaseHTTPRequestHandler
 content ='''
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
+=======
+<html>f
+>>>>>>> 2eec65c2579a281586da6bf823cd6e683aed2719
 <head>
   <title>TCP/IP Protocol Table</title>
   <style>
@@ -105,7 +109,11 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_header("content-type", "text/html")
         self.end_headers()
         self.wfile.write(content.encode())
+<<<<<<< HEAD
 print("My web server is running")
+=======
+print("This is my webserver")
+>>>>>>> 2eec65c2579a281586da6bf823cd6e683aed2719
 server_address =('',8000)
 httpd = HTTPServer(server_address,MyServer)
 httpd.serve_forever()
@@ -113,8 +121,13 @@ httpd.serve_forever()
 ~~~
 ## OUTPUT:
 ![alt text](<Screenshot 2025-09-19 203956.png>)
+<<<<<<< HEAD
 ![alt text](<Screenshot 2025-09-19 213811.png>)
 
+=======
+![alt text](<Screenshot 2025-09-19 204032.png>)
+![alt text](<Screenshot 2025-09-19 213811.png>)
+>>>>>>> 2eec65c2579a281586da6bf823cd6e683aed2719
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
 
