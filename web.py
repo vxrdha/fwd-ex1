@@ -69,5 +69,5 @@ class myhandler(BaseHTTPRequestHandler):
         self.wfile.write(content.encode())
 server_address = ('',8000)
 httpd = HTTPServer(server_address,myhandler)
-print("my webserver is running...")
+print("My webserver is running...")
 httpd.serve_forever()
